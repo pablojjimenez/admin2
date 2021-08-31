@@ -23,9 +23,11 @@ class Controller:
 
     def insertar(self):
         data_model = self.factory.create_model()
+
         dat = self._ask_for_data(data_model)
-        data_model.fill(dat)
-        self.factory.create_container().insert(data_model)
+        data_model._fill(dat)
+        print(data_model)
+       # self.factory.create_container().insert(data_model)
 
     def listar(self):
         v = self.factory.create_container().list()
