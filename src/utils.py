@@ -26,8 +26,13 @@ def today_date() -> (int, int, int):
     )
 
 
-def get_epoch(dia: int, mes: int, anio=current_year()) -> int:
+def get_epoch(dia: int, mes=current_month(), anio=current_year()) -> int:
     return int(datetime(year=anio, month=mes, day=dia).timestamp())
+
+
+def next_month() -> int:
+    solve = (today_date()[1] + 1) % 13
+    return solve if solve != 0 else 1
 
 
 def date_from_epoch(epoch: int) -> str:
