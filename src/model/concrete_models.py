@@ -1,6 +1,6 @@
-from typing import Dict
-
+from typing import Dict, Tuple
 from src.model.model import Model
+from src.utils import date_from_epoch
 
 
 class IngresoM(Model):
@@ -15,12 +15,12 @@ class IngresoM(Model):
         super()._fill_attrs(data)
 
     @classmethod
-    def from_params(cls, ingreso, concepto, fecha, pagador):
+    def from_tuple(cls, tuple: Tuple):
         return cls({
-            'precio': ingreso,
-            'concepto': concepto,
-            'fecha': fecha,
-            'pagador': pagador
+            'precio': tuple[1],
+            'concepto': tuple[2],
+            'fecha': date_from_epoch(tuple[3]),
+            'pagador': tuple[4]
         })
 
     def __str__(self) -> str:
@@ -39,12 +39,12 @@ class GastoM(Model):
         super()._fill_attrs(data)
 
     @classmethod
-    def from_params(cls, ingreso, concepto, fecha, pagador):
+    def from_tuple(cls, tuple: Tuple):
         return cls({
-            'precio': ingreso,
-            'establecimiento': concepto,
-            'fecha': fecha,
-            'comentario': pagador
+            'precio': tuple[1],
+            'establecimiento': tuple[2],
+            'fecha': date_from_epoch(tuple[3]),
+            'comentario': tuple[4]
         })
 
     def __str__(self) -> str:
@@ -66,15 +66,15 @@ class AlumnoM(Model):
         super()._fill_attrs(data)
 
     @classmethod
-    def from_params(cls, nombre, tlf, mail, estudios, comentarios, activo, precio):
+    def from_tuple(cls, tuple: Tuple):
         return cls({
-            'nombre': nombre,
-            'tlf': tlf,
-            'mail': mail,
-            'estudios': estudios,
-            'comentarios': comentarios,
-            'activo': activo,
-            'precio': precio
+            'nombre': tuple[1],
+            'tlf': tuple[2],
+            'mail': tuple[3],
+            'estudios': tuple[4],
+            'comentarios': tuple[5],
+            'activo': tuple[6],
+            'precio': tuple[7]
         })
 
     def __str__(self) -> str:
@@ -94,13 +94,13 @@ class ClaseM(Model):
         super()._fill_attrs(data)
 
     @classmethod
-    def from_params(cls, alumno, tech, duracion, precio, fecha):
+    def from_tuple(cls, tuple: Tuple):
         return cls({
-            'alumno': alumno,
-            'tech': tech,
-            'duracion': duracion,
-            'precio': precio,
-            'fecha': fecha,
+            'alumno': tuple[1],
+            'tech': tuple[2],
+            'duracion': tuple[3],
+            'precio': tuple[4],
+            'fecha': date_from_epoch(tuple[5]),
         })
 
     def __str__(self) -> str:

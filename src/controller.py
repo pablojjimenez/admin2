@@ -33,5 +33,5 @@ class Controller:
 
     def listar(self):
         v = self.factory.create_container().list()
-        v = [self.factory.create_model().from_params(i[1], i[2], i[3], i[4]) for i in v]
+        v = [self.factory.create_model().from_tuple(i) for i in v]
         self._show_data(v)
