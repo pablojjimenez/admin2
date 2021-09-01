@@ -26,7 +26,7 @@ class Controller:
 
     def _show_data(self, header_names:[], v: []):
         console = Console()
-        table = Table(show_header=True, header_style="bold blue", box=box.ROUNDED, show_footer=True)
+        table = Table(show_header=True, header_style="bold blue", box=box.ROUNDED)
         for i in header_names:
             table.add_column(i.upper())
         for i in v:
