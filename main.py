@@ -1,8 +1,8 @@
 import sys
-from platform import system
+import os
 from src.color import C
 from src.controller import Controller
-from src.factories import GastoFactory, IngresoFactory
+from src.factories import GastoFactory, IngresoFactory, ClaseFactory, AlumnoFactory
 
 
 def handler(arg):
@@ -14,26 +14,31 @@ def handler(arg):
         Controller(IngresoFactory()).insertar()
     elif arg == 'li':
         Controller(IngresoFactory()).listar()
+    elif arg == 'ic':
+        Controller(ClaseFactory()).insertar()
+    elif arg == 'lc':
+        Controller(ClaseFactory()).listar()
+    elif arg == 'ia':
+        Controller(AlumnoFactory()).insertar()
+    elif arg == 'la':
+        Controller(AlumnoFactory()).listar()
 
 
 def clean():
-    os_name = sys.platform.system().lower()
-    if 'windows' in os_name:
-        system('cls')
-    else:
-        system('clear')
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 if __name__ == '__main__':
-    sms = f'''{C.KMAG}
+    sms = '''{}
         1. gastos.          (ig, lg)
         2. ingresos.        (ii, li)
         3. clases.          (ic, lc)
         4. informe.         (inf)
         5. clases por mes.  (infc) 
-        {C.RST}
-        '''
+        {}
+    '''.format(C.KMAG, C.RST)
     clean()
+
     if len(sys.argv) > 1:
         handler(sys.argv[1])
     else:

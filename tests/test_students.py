@@ -1,30 +1,16 @@
 import pytest
 from src.container.concrete_containers import AlumnosCont
+from src.db_schemas import ALUMNOS_SH
 from src.model.concrete_models import GastoM, AlumnoM
-
-s = '''
-CREATE TABLE "Alumnos" (
-	"id"	INTEGER,
-	"nombre"	TEXT NOT NULL,
-	"tlf"	INTEGER NOT NULL,
-	"mail"	TEXT,
-	"estudios"	TEXT,
-	"comentarios"	TEXT,
-	"activo"	INTEGER DEFAULT 1,
-	"precio"	REAL,
-	PRIMARY KEY("id" AUTOINCREMENT)
-)
-'''
 
 OBJS = [
     AlumnoM.from_params('name', 637263547, 'algo@gmail.com', 'info', 'comment', 1, 9),
     AlumnoM.from_params('name2', 637263547, 'algo@gmail.com', 'info', 'comment', 1, 10),
 ]
 
-
 @pytest.fixture
 def test_db():
-    cont = AlumnosCont(db='TEST_DB.db', name='Alumnos', schema=s)
+    cont = AlumnosCont(db='TEST_DB.db', name='Alumnos', schema=ALUMNOS_SH)
     cont.reset_table()
     for i in OBJS:
         cont.insert(i)

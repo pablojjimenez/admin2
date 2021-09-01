@@ -1,19 +1,10 @@
 import pytest
-
 from src.container.concrete_containers import IngresoCont
+from src.db_schemas import INGRESOS_SH
 from src.model.concrete_models import IngresoM
 from src.utils import today_epoch, get_epoch, current_month, MONTHS_NAMES
 
-s = '''
-CREATE TABLE "Ingresos" (
-	"id"	INTEGER NOT NULL,
-	"precio"	REAL NOT NULL,
-	"concepto"	TEXT NOT NULL,
-	"fecha"	INTEGER NOT NULL,
-	"pagador"	TEXT NOT NULL,
-	PRIMARY KEY("id" AUTOINCREMENT)
-)
-'''
+
 
 OBJS = [
     IngresoM.from_params(10, 'conceto', today_epoch(), 'pagador'),
@@ -26,7 +17,7 @@ OBJS = [
 
 @pytest.fixture
 def test_db():
-    cont = IngresoCont(db='TEST_DB.db', name='Ingresos', schema=s)
+    cont = IngresoCont(db='TEST_DB.db', name='Ingresos', schema=INGRESOS_SH)
     cont.reset_table()
     for i in OBJS:
         cont.insert(i)

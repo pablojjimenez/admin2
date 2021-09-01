@@ -1,7 +1,7 @@
 import sqlite3
 from abc import ABC, abstractmethod
-from model.IlegalArgumentError import IllegalArgumentsError
-from utils import get_epoch, next_month, MONTHS_NAMES
+from src.model.IlegalArgumentError import IllegalArgumentsError
+from src.utils import get_epoch, next_month, MONTHS_NAMES
 
 
 class Container(ABC):

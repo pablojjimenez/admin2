@@ -1,20 +1,9 @@
 import pytest
 from src.container.concrete_containers import GastosCont, ClaseCont
+from src.db_schemas import CLASES_SH
 from src.model.concrete_models import GastoM, ClaseM
 from src.utils import today_epoch, get_epoch, current_month, MONTHS_NAMES
 
-s = '''
-CREATE TABLE "Clases" (
-	"id"	INTEGER NOT NULL,
-	"alumno"	INTEGER,
-	"tech"	INTEGER,
-	"duracion"	INTEGER NOT NULL,
-	"precio"	REAL NOT NULL,
-	"fecha"	INTEGER NOT NULL,
-	PRIMARY KEY("id" AUTOINCREMENT),
-	FOREIGN KEY("alumno") REFERENCES "Alumno"("id")
-)
-'''
 
 OBJS = [
     ClaseM.from_params(1, 'JAVA', 60, 9, today_epoch()),
@@ -27,7 +16,7 @@ OBJS = [
 
 @pytest.fixture
 def test_db():
-    cont = ClaseCont(db='TEST_DB.db', name='Clases', schema=s)
+    cont = ClaseCont(db='TEST_DB.db', name='Clases', schema=CLASES_SH)
     cont.reset_table()
     for i in OBJS:
         cont.insert(i)
