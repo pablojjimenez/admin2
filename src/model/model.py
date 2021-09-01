@@ -24,7 +24,7 @@ class Model(ABC):
         for i in self._dir():
             prop = getattr(self, i)
             out += '{:>{w}}'.format(prop, w=20)
-        out += '{{w}:>}'.format(C.RST, w=20)
+        out += '{:>{w}}'.format(C.RST, w=20)
         return out
 
 
