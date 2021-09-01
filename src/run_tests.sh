@@ -10,7 +10,7 @@ function usage {
 usage
 
 # activate test environment
-. test_venv/bin/activate
+. venv/bin/activate
 
 # run all the tests under the 'tests' folder
 if [ "$1" != "" ]; then
