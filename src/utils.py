@@ -1,5 +1,7 @@
 from datetime import datetime
 
+MONTHS_NAMES = 'ENERO,FEBRERO,MARZO,ABRIL,MAYO,JUNIO,JULIO,AGOSTO,SEPTIEMBRE,OCTUBRE,NOVIEMBRE,DICIEMBRE'.split(',')
+
 
 def current_year() -> int:
     obj = datetime.today()
@@ -30,9 +32,13 @@ def get_epoch(dia: int, mes=current_month(), anio=current_year()) -> int:
     return int(datetime(year=anio, month=mes, day=dia).timestamp())
 
 
-def next_month() -> int:
-    solve = (today_date()[1] + 1) % 13
-    return solve if solve != 0 else 1
+def next_month(month: int = None) -> int:
+    if month:
+        solve = (month + 1) % 13
+        return solve if solve != 0 else 1
+    else:
+        solve = (today_date()[1] + 1) % 13
+        return solve if solve != 0 else 1
 
 
 def date_from_epoch(epoch: int) -> str:

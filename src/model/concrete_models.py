@@ -5,7 +5,7 @@ from src.model.model import Model
 
 class IngresoM(Model):
     def __init__(self, data: Dict = None):
-        self.ingreso = None
+        self.precio = None
         self.concepto = None
         self.fecha = None
         self.pagador = None
@@ -17,7 +17,7 @@ class IngresoM(Model):
     @classmethod
     def from_params(cls, ingreso, concepto, fecha, pagador):
         return cls({
-            'ingreso': ingreso,
+            'precio': ingreso,
             'concepto': concepto,
             'fecha': fecha,
             'pagador': pagador

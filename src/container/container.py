@@ -1,7 +1,7 @@
 import sqlite3
 from abc import ABC, abstractmethod
 from src.model.IlegalArgumentError import IllegalArgumentsError
-from src.utils import get_epoch, next_month
+from src.utils import get_epoch, next_month, MONTHS_NAMES
 
 
 class Container(ABC):
@@ -50,12 +50,27 @@ class Container(ABC):
         r = self.conn.cursor().execute(f'select count(*) from {self.ntable};')
         return r.fetchall()[0][0]
 
-    @abstractmethod
-    def sum(self):
-        pass
+    def sum(self, month=None) -> int:
+        if month:
+            str = f'select sum(precio) from {self.ntable} where fecha>={get_epoch(1, month)} and fecha<{get_epoch(1, next_month(month))}'
+        else:
+            str = f'select sum(precio) from {self.ntable}'
+        r = self.conn.cursor().execute(str)
+        sum = r.fetchall()[0][0]
+        return sum if sum is not None else 0.0
 
     def reset_table(self):
         self.conn.execute(f'DROP TABLE IF EXISTS {self.ntable}')
         self.conn.commit()
         self._create_schema(self.schema)
         self.conn.commit()
+
+    def count_group(self):
+        expected = {}
+        mes = 1
+        for i in MONTHS_NAMES:
+            expected.setdefault(i, self.sum(mes))
+            mes += 1
+        return expected
+
+
