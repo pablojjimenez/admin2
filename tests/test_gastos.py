@@ -48,12 +48,8 @@ class TestGastos:
         assert test_db.sum(1) == 0.0
 
     def test_list(self, test_db):
-        ing = GastoM.from_params(
-            test_db.list()[3][1],
-            test_db.list()[3][2],
-            test_db.list()[3][3],
-            test_db.list()[3][4]
-        )
+        ing = test_db.list()
+        ing = GastoM.from_params(ing[3][1], ing[3][2], ing[3][3], ing[3][4])
         assert ing.precio == OBJS[3].precio
         assert ing.fecha == OBJS[3].fecha
 

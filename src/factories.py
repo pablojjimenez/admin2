@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
-from src.container.container import Container
-from src.container.concrete_containers import IngresoCont, GastosCont
-from src.model.concrete_models import IngresoM, GastoM
-from src.model.model import Model
+from container.container import Container
+from container.concrete_containers import IngresoCont, GastosCont
+from model.concrete_models import IngresoM, GastoM
+from model.model import Model
 
 
 class AbstractFactory(ABC):

@@ -1,10 +1,8 @@
 from typing import Dict
-
-from src.color import C
-from src.factories import AbstractFactory
-from src.model.concrete_models import IngresoM
-from src.model.model import Model
-from src.utils import today_epoch
+from color import C
+from factories import AbstractFactory
+from model.model import Model
+from utils import today_epoch
 
 
 class Controller:
