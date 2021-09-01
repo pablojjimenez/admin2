@@ -65,3 +65,4 @@ class TestGastos:
         expected['AGOSTO'] = 10.1
 
         assert expected == test_db.count_group()
+
