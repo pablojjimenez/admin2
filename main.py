@@ -33,8 +33,9 @@ if __name__ == '__main__':
         1. gastos.          (ig, lg)
         2. ingresos.        (ii, li)
         3. clases.          (ic, lc)
-        4. informe.         (inf)
-        5. clases por mes.  (infc) 
+        4. alumnos.         (ia, la)
+        5. informe.         (inf)
+        6. clases por mes.  (infc) 
         {}
     '''.format(C.KMAG, C.RST)
     clean()
