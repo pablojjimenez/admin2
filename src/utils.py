@@ -42,5 +42,5 @@ def next_month(month: int = None) -> int:
 
 
 def date_from_epoch(epoch: int) -> str:
-    d = datetime.datetime.utcfromtimestamp(epoch)
+    d = datetime.utcfromtimestamp(epoch)
     return d.strftime("%d-%m-%Y")
