@@ -26,3 +26,7 @@ class Model(ABC):
             out += '{:>{w}}'.format(prop, w=20)
         out += '{:>{w}}'.format(C.RST, w=20)
         return out
+
+    def get_tuple(self):
+        return [str(getattr(self, i)) for i in self._dir()]
+
