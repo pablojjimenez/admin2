@@ -45,3 +45,6 @@ class Controller:
         v = self.factory.create_container().list()
         v = [self.factory.create_model().from_tuple(i) for i in v]
         self._show_data(self.factory.create_model()._dir(), v)
+
+    def sum_prince(self, mes=None):
+        return self.factory.create_container().sum(mes)
