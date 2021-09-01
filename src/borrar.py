@@ -1,8 +1,7 @@
 from src.controller import Controller
-from src.factories import IngresoFactory
+from src.factories import IngresoFactory, GastoFactory
 
-
-c = Controller(IngresoFactory())
+c = Controller(GastoFactory())
 
 c.insertar()
 c.listar()

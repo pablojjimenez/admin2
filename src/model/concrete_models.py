@@ -25,3 +25,26 @@ class IngresoM(Model):
 
     def __str__(self) -> str:
         return super().__str__()
+
+class GastoM(Model):
+    def __init__(self, data: Dict = None):
+        self.precio = None
+        self.establecimiento = None
+        self.fecha = None
+        self.comentario = None
+        super().__init__(data)
+
+    def _fill(self, data: Dict):
+        super()._fill_attrs(data)
+
+    @classmethod
+    def from_params(cls, ingreso, concepto, fecha, pagador):
+        return cls({
+            'precio': ingreso,
+            'establecimiento': concepto,
+            'fecha': fecha,
+            'comentario': pagador
+        })
+
+    def __str__(self) -> str:
+        return super().__str__()

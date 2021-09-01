@@ -1,6 +1,5 @@
 import pytest
-
-from src.container.concrete_containers import IngresoCont
+from src.container.concrete_containers import GastosCont
 from src.model.concrete_models import GastoM
 from src.utils import today_epoch, get_epoch, current_month, MONTHS_NAMES
 
@@ -62,10 +61,7 @@ class TestGastos:
         expected = {}
         for i in MONTHS_NAMES:
             expected.setdefault(i, 0)
-        expected[MONTHS_NAMES[current_month()-1]] = 41.33
+        expected[MONTHS_NAMES[current_month() - 1]] = 41.33
         expected['AGOSTO'] = 10.1
 
         assert expected == test_db.count_group()
-
-    def test_more_entablish_use(self, test_db):
-        assert ('establec1', 20) == test_db.predict_site()
