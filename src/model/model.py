@@ -9,7 +9,7 @@ class Model(ABC):
         if data: self._fill_attrs(data)
 
     def _dir(self) -> Iterable[str]:
-        return list(filter(lambda x: x[:1] != '_', self.__dir__()))
+        return list(filter(lambda x: x[:1] != '_' and '_' not in x, self.__dir__()))
 
     def _fill_attrs(self, data: Dict):
         for i in data.keys():
@@ -26,18 +26,3 @@ class Model(ABC):
             out += '{:>{w}}'.format(prop, w=20)
         out += '{:>{w}}'.format(C.RST, w=20)
         return out
-
-
-class IngresoM(Model):
-    def __init__(self, data: Dict = None):
-        self.ingreso = None
-        self.concepto = None
-        self.fecha = None
-        self.pagador = None
-        super().__init__(data)
-
-    def _fill(self, data: Dict):
-        super()._fill_attrs(data)
-
-    def __str__(self) -> str:
-        return super(IngresoM, self).__str__()

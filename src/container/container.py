@@ -5,6 +5,9 @@ from src.utils import get_epoch, next_month
 
 class Container:
     def __init__(self, **kwargs):
+        """
+        :params: db, name, opc:schema
+        """
         self.sql_insert = "INSERT INTO {table} ({fields}) VALUES ({values});"
         self.sql_select = "SELECT * FROM {table} WHERE fecha>={fi} AND fecha<{ff}"
         state = 'db' and 'name' in kwargs.keys()
@@ -39,7 +42,7 @@ class Container:
             ff=get_epoch(1, next_month())
         )
         iter = self.conn.cursor().execute(f)
-        return list(iter)
+        return iter.fetchall()
 
     def count_list(self) -> int:
         r = self.conn.cursor().execute(f'select count(*) from {self.ntable};')
