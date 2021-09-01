@@ -10,7 +10,6 @@ class Container(ABC):
         :params: db, name, opc:schema
         """
         self.sql_insert = "INSERT INTO {table} ({fields}) VALUES ({values});"
-        self.sql_select = "SELECT * FROM {table} WHERE fecha>={fi} AND fecha<{ff}"
         state = 'db' and 'name' in kwargs.keys()
         if not state: raise (IllegalArgumentsError('ntable and db mandatory!'))
         self.ntable = kwargs.get('name')
@@ -37,13 +36,12 @@ class Container(ABC):
         self.conn.cursor().execute(f)
         self.conn.commit()
 
-    def list(self):
-        f = self.sql_select.format(
-            table=self.ntable,
-            fi=get_epoch(1),
-            ff=get_epoch(1, next_month())
-        )
-        iter = self.conn.cursor().execute(f)
+    def list(self, month: int = None):
+        if month:
+            sql = f'SELECT * FROM {self.ntable} WHERE fecha>={get_epoch(1, month)} AND fecha<{get_epoch(1, next_month(month))} '
+        else:
+            sql = f'SELECT * FROM {self.ntable}'
+        iter = self.conn.cursor().execute(sql)
         return iter.fetchall()
 
     def count_list(self) -> int:

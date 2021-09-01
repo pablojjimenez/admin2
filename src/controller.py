@@ -1,8 +1,6 @@
 from typing import Dict
-
 from src.color import C
 from src.factories import AbstractFactory
-from src.model.concrete_models import IngresoM
 from src.model.model import Model
 from src.utils import today_epoch
 

@@ -1,18 +1,9 @@
 import pytest
 from src.container.concrete_containers import GastosCont
+from src.db_schemas import GASTOS_SH
 from src.model.concrete_models import GastoM
 from src.utils import today_epoch, get_epoch, current_month, MONTHS_NAMES
 
-s = '''
-CREATE TABLE "Gastos" (
-	"id"	INTEGER NOT NULL,
-	"precio"	REAL NOT NULL,
-	"establecimiento"	TEXT NOT NULL,
-	"fecha"	INTEGER NOT NULL,
-	"comentario"	TEXT,
-	PRIMARY KEY("id" AUTOINCREMENT)
-)
-'''
 
 OBJS = [
     GastoM.from_params(10, 'establec', today_epoch(), 'comment'),
@@ -25,7 +16,7 @@ OBJS = [
 
 @pytest.fixture
 def test_db():
-    cont = GastosCont(db='TEST_DB.db', name='Gastos', schema=s)
+    cont = GastosCont(db='TEST_DB.db', name='Gastos', schema=GASTOS_SH)
     cont.reset_table()
     for i in OBJS:
         cont.insert(i)
@@ -48,12 +39,8 @@ class TestGastos:
         assert test_db.sum(1) == 0.0
 
     def test_list(self, test_db):
-        ing = GastoM.from_params(
-            test_db.list()[3][1],
-            test_db.list()[3][2],
-            test_db.list()[3][3],
-            test_db.list()[3][4]
-        )
+        ing = test_db.list()
+        ing = GastoM.from_params(ing[3][1], ing[3][2], ing[3][3], ing[3][4])
         assert ing.precio == OBJS[3].precio
         assert ing.fecha == OBJS[3].fecha
 
