@@ -57,7 +57,10 @@ class Container(ABC):
             str = f'select sum(precio) from {self.ntable} where fecha>={get_epoch(1, month)} and fecha<{get_epoch(1, next_month(month))}'
         else:
             str = f'select sum(precio) from {self.ntable}'
-        r = self.conn.cursor().execute(str)
+        try:
+            r = self.conn.cursor().execute(str)
+        except sqlite3.OperationalError:
+            return 0
         sum = r.fetchall()[0][0]
         return sum if sum is not None else 0.0
 

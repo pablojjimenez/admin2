@@ -19,7 +19,7 @@ class Inform:
         console = Console()
         table = Table(
             title='INFORME ABSOLUTO',
-            box=box.MINIMAL_HEAVY_HEAD,
+            box=box.ROUNDED,
             show_footer=True,
             show_header=True
         )
@@ -32,12 +32,12 @@ class Inform:
         table.add_column('gastado', footer=f'[red] {total2}€ [/red]', justify='center')
         table.add_column('resto', footer=f'[green] {save}€ [/green]', width=12)
         for month in range(len(MONTHS_NAMES)):
-            g1 = ingresos.sum_prince(month)
-            g2 = clases.sum_prince(month)
+            g1 = ingresos.sum_prince(month+1)
+            g2 = clases.sum_prince(month+1)
 
             str = '[green]{:>{w}}€ {:>{w}}€[/green]'.format(g1, g2, w=8)
-            gastado = f'[red]{gastos.sum_prince(month)}€[/red]'
-            left = f'[dark_orange]{round((g1+g2)-gastos.sum_prince(month), 2)}€[/dark_orange]'
+            gastado = f'[red]{gastos.sum_prince(month+1)}€[/red]'
+            left = f'[dark_orange]{round((g1+g2)-gastos.sum_prince(month+1), 2)}€[/dark_orange]'
             table.add_row(MONTHS_NAMES[month], str, gastado, left)
 
         console.print(table)
