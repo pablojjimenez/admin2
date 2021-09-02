@@ -15,7 +15,7 @@ class AbstractFactory(ABC):
     def create_model(self) -> Model:
         pass
 
-DB_NAME = '/Users/pablojj/MEGA/admin/miData2_test.db'
+DB_NAME = '/Users/pablojj/MEGA/admin/miData2.db'
 
 class IngresoFactory(AbstractFactory):
     def create_container(self) -> Container:

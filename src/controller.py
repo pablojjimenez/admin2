@@ -2,7 +2,7 @@ from typing import Dict
 from src.color import C
 from src.factories import AbstractFactory
 from src.model.model import Model
-from src.utils import today_epoch
+from src.utils import today_epoch, current_month
 from rich.console import Console
 from rich.table import Table
 from rich import box
@@ -26,9 +26,14 @@ class Controller:
 
     def _show_data(self, header_names:[], v: []):
         console = Console()
-        table = Table(show_header=True, header_style="bold blue", box=box.ROUNDED)
+        table = Table(show_header=True, header_style="bold blue", box=box.ROUNDED, show_footer=True)
+        first = True
         for i in header_names:
-            table.add_column(i.upper())
+            if first:
+                table.add_column(i.upper(), footer=f'[bold blue]{self.factory.create_container().sum(current_month())}€[/bold blue]')
+                first = False
+            else:
+                table.add_column(i.upper())
         for i in v:
             content = i.get_tuple()
             table.add_row(*content)
@@ -46,5 +51,5 @@ class Controller:
         v = [self.factory.create_model().from_tuple(i) for i in v]
         self._show_data(self.factory.create_model()._dir(), v)
 
-    def sum_prince(self, mes=None):
-        return self.factory.create_container().sum(mes)
+    def sum_prince(self, mes=None) -> float:
+        return round(self.factory.create_container().sum(mes), 2)

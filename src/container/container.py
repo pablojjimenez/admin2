@@ -52,7 +52,7 @@ class Container(ABC):
         r = self.conn.cursor().execute(f'select count(*) from {self.ntable};')
         return r.fetchall()[0][0]
 
-    def sum(self, month=None) -> int:
+    def sum(self, month=None) -> float:
         if month:
             str = f'select sum(precio) from {self.ntable} where fecha>={get_epoch(1, month)} and fecha<{get_epoch(1, next_month(month))}'
         else:
