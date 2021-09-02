@@ -10,7 +10,8 @@ def current_year() -> int:
 
 def current_month() -> int:
     obj = datetime.today()
-    return int(obj.strftime("%m"))
+    #return int(obj.strftime("%m"))
+    return 8
 
 
 def today_epoch() -> int:

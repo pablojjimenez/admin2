@@ -1,7 +1,7 @@
 import sqlite3
 from abc import ABC, abstractmethod
 from src.model.IlegalArgumentError import IllegalArgumentsError
-from src.utils import get_epoch, next_month, MONTHS_NAMES
+from src.utils import get_epoch, next_month, MONTHS_NAMES, current_month
 
 
 class Container(ABC):
@@ -40,15 +40,19 @@ class Container(ABC):
         if month:
             sql = f'SELECT * FROM {self.ntable} WHERE fecha>={get_epoch(1, month)} AND fecha<{get_epoch(1, next_month(month))} '
         else:
-            sql = f'SELECT * FROM {self.ntable}'
-        iter = self.conn.cursor().execute(sql)
+            sql = f'SELECT * FROM {self.ntable} WHERE fecha>={get_epoch(1, current_month())} AND fecha<{get_epoch(1, next_month())} '
+        try:
+            iter = self.conn.cursor().execute(sql)
+        except sqlite3.OperationalError:
+            iter = self.conn.cursor().execute(f'SELECT * FROM {self.ntable}')
+
         return iter.fetchall()
 
     def count_list(self) -> int:
         r = self.conn.cursor().execute(f'select count(*) from {self.ntable};')
         return r.fetchall()[0][0]
 
-    def sum(self, month=None) -> int:
+    def sum(self, month=None) -> float:
         if month:
             str = f'select sum(precio) from {self.ntable} where fecha>={get_epoch(1, month)} and fecha<{get_epoch(1, next_month(month))}'
         else:

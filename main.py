@@ -1,5 +1,7 @@
 import sys
 import os
+
+from src.Inform import Inform
 from src.color import C
 from src.controller import Controller
 from src.factories import GastoFactory, IngresoFactory, ClaseFactory, AlumnoFactory
@@ -22,6 +24,8 @@ def handler(arg):
         Controller(AlumnoFactory()).insertar()
     elif arg == 'la':
         Controller(AlumnoFactory()).listar()
+    elif arg == 'inf':
+        Inform().show_inf()
 
 
 def clean():
