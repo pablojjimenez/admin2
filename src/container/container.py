@@ -78,4 +78,5 @@ class Container(ABC):
             mes += 1
         return expected
 
-
+    def show_before_insert(self) -> str:
+        return ''
