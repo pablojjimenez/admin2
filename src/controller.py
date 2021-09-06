@@ -24,13 +24,13 @@ class Controller:
         print(C.RST)
         return dat
 
-    def _show_data(self, header_names: [], v: []):
+    def _show_data(self, header_names: [], v: [], month: int = current_month()):
         console = Console()
         table = Table(show_header=True, header_style="bold blue", box=box.SIMPLE_HEAVY, show_footer=True)
         first = True
         for i in header_names:
             if first:
-                table.add_column(i.upper(), footer=f'[bold blue]{self.container.sum(current_month())}€[/bold blue]')
+                table.add_column(i.upper(), footer=f'[bold blue]{self.container.sum(month)}€[/bold blue]')
                 first = False
             else:
                 table.add_column(i.upper())
@@ -45,10 +45,10 @@ class Controller:
         self.model._fill(dat)
         self.container.insert(self.model)
 
-    def listar(self):
-        v = self.container.list()
+    def listar(self, month: int = current_month()):
+        v = self.container.list(month)
         v = [self.model.from_tuple(i) for i in v]
-        self._show_data(self.model._dir(), v)
+        self._show_data(self.model._dir(), v, month)
 
     def sum_prince(self, mes=None) -> float:
         return round(self.container.sum(mes), 2)
