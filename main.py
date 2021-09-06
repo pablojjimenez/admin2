@@ -8,24 +8,34 @@ from src.factories import GastoFactory, IngresoFactory, ClaseFactory, AlumnoFact
 
 
 def handler(arg):
-    if arg == 'ig':
-        Controller(GastoFactory()).insertar()
-    elif arg == 'lg':
-        Controller(GastoFactory()).listar()
-    elif arg == 'ii':
-        Controller(IngresoFactory()).insertar()
-    elif arg == 'li':
-        Controller(IngresoFactory()).listar()
-    elif arg == 'ic':
-        Controller(ClaseFactory()).insertar()
-    elif arg == 'lc':
-        Controller(ClaseFactory()).listar()
-    elif arg == 'ia':
-        Controller(AlumnoFactory()).insertar()
-    elif arg == 'la':
-        Controller(AlumnoFactory()).listar()
-    elif arg == 'inf':
-        Inform().show_inf()
+    if len(sys.argv) == 2:
+        if arg == 'ig':
+            Controller(GastoFactory()).insertar()
+        elif arg == 'lg':
+            Controller(GastoFactory()).listar()
+        elif arg == 'ii':
+            Controller(IngresoFactory()).insertar()
+        elif arg == 'li':
+            Controller(IngresoFactory()).listar()
+        elif arg == 'ic':
+            Controller(ClaseFactory()).insertar()
+        elif arg == 'lc':
+            Controller(ClaseFactory()).listar()
+        elif arg == 'ia':
+            Controller(AlumnoFactory()).insertar()
+        elif arg == 'la':
+            Controller(AlumnoFactory()).listar()
+        elif arg == 'inf':
+            Inform().show_inf()
+    else:
+        if arg == 'lg':
+            Controller(GastoFactory()).listar(int(sys.argv[2]))
+        elif arg == 'li':
+            Controller(IngresoFactory()).listar(int(sys.argv[2]))
+        elif arg == 'lc':
+            Controller(ClaseFactory()).listar(int(sys.argv[2]))
+        elif arg == 'la':
+            Controller(AlumnoFactory()).listar(int(sys.argv[2]))
 
 
 def clean():
