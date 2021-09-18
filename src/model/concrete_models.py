@@ -1,6 +1,6 @@
 from typing import Dict, Tuple
 from src.model.model import Model
-from src.utils import date_from_epoch
+from src.utils import translate_from_epoch
 
 
 class IngresoM(Model):
@@ -19,7 +19,7 @@ class IngresoM(Model):
         return cls({
             'precio': tuple[1],
             'concepto': tuple[2],
-            'fecha': date_from_epoch(tuple[3]),
+            'fecha': translate_from_epoch(tuple[3]),
             'pagador': tuple[4]
         })
 
@@ -43,7 +43,7 @@ class GastoM(Model):
         return cls({
             'precio': tuple[1],
             'establecimiento': tuple[2],
-            'fecha': date_from_epoch(tuple[3]),
+            'fecha': translate_from_epoch(tuple[3]),
             'comentario': tuple[4]
         })
 
@@ -100,7 +100,7 @@ class ClaseM(Model):
             'tech': tuple[2],
             'duracion': tuple[3],
             'precio': tuple[4],
-            'fecha': date_from_epoch(tuple[5]),
+            'fecha': translate_from_epoch(tuple[5]),
         })
 
     def __str__(self) -> str:
