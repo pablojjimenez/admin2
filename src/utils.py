@@ -14,9 +14,7 @@ def current_month() -> int:
 
 
 def today_epoch() -> int:
-    # int(datetime.now().timestamp())
-    t = today_date()
-    return get_epoch(t[0], t[1], t[2])
+    return int(datetime.now().timestamp())
 
 
 def today_date() -> (int, int, int):
@@ -41,6 +39,6 @@ def next_month(month: int = None) -> int:
         return solve if solve != 0 else 1
 
 
-def date_from_epoch(epoch: int) -> str:
+def translate_from_epoch(epoch: int) -> str:
     d = datetime.utcfromtimestamp(epoch)
     return d.strftime("%d-%m-%Y")
