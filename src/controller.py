@@ -46,9 +46,9 @@ class Controller:
         self.container.insert(self.model)
 
     def listar(self, month: int = current_month()):
-        v = self.container.list(month)
-        v = [self.model.from_tuple(i) for i in v]
-        self._show_data(self.model._dir(), v, month)
+        model_list = self.container.list(month)
+        model_list = [self.model.from_tuple(i) for i in model_list]
+        self._show_data(self.model._dir(), model_list, month)
 
     def sum_prince(self, mes=None) -> float:
         return round(self.container.sum(mes), 2)

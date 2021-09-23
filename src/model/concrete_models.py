@@ -105,3 +105,23 @@ class ClaseM(Model):
 
     def __str__(self) -> str:
         return super().__str__()
+
+
+class HistoryM(Model):
+    def __init__(self, data: Dict = None):
+        self.txt = None
+        self.fecha = None
+        super().__init__(data)
+
+    def _fill(self, data: Dict):
+        super()._fill_attrs(data)
+
+    @classmethod
+    def from_tuple(cls, tuple: Tuple):
+        return cls({
+            'txt': tuple[1],
+            'fecha': translate_from_epoch(tuple[2]),
+        })
+
+    def __str__(self) -> str:
+        return super().__str__()
