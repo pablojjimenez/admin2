@@ -119,11 +119,8 @@ class HistoryM(Model):
     @classmethod
     def from_tuple(cls, tuple: Tuple):
         return cls({
-            'alumno': tuple[1],
-            'tech': tuple[2],
-            'duracion': tuple[3],
-            'precio': tuple[4],
-            'fecha': translate_from_epoch(tuple[5]),
+            'txt': tuple[1],
+            'fecha': tuple[2],
         })
 
     def __str__(self) -> str:
