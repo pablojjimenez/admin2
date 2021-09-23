@@ -120,7 +120,7 @@ class HistoryM(Model):
     def from_tuple(cls, tuple: Tuple):
         return cls({
             'txt': tuple[1],
-            'fecha': tuple[2],
+            'fecha': translate_from_epoch(tuple[2]),
         })
 
     def __str__(self) -> str:
