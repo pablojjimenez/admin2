@@ -33,3 +33,8 @@ class ClaseCont(Container):
         f.write(str(out))
 
         return sorted(out)
+
+
+class HistoryCont(Container):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)

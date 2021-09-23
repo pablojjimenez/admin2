@@ -4,7 +4,7 @@ import os
 from src.Inform import Inform
 from src.color import C
 from src.controller import Controller
-from src.factories import GastoFactory, IngresoFactory, ClaseFactory, AlumnoFactory
+from src.factories import GastoFactory, IngresoFactory, ClaseFactory, AlumnoFactory, HistoryFactory
 
 
 def handler(arg):
@@ -27,6 +27,10 @@ def handler(arg):
             Controller(AlumnoFactory()).listar()
         elif arg == 'inf':
             Inform().show_inf()
+        elif arg == 'h':
+            Controller(HistoryFactory()).listar()
+        elif arg == 'ih':
+            Controller(HistoryFactory()).insertar()
     else:
         if arg == 'lg':
             Controller(GastoFactory()).listar(int(sys.argv[2]))
