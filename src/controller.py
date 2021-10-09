@@ -40,8 +40,8 @@ class Controller:
 
         console.print(table)
 
-    def insertar(self):
-        dat = self._ask_for_data()
+    def insertar(self, dat=None):
+        if dat is None: dat = self._ask_for_data()
         self.model._fill(dat)
         self.container.insert(self.model)
 

@@ -4,14 +4,17 @@ from telebot import types
 import logging
 
 from src.container.settings import Settings
+from src.controller import Controller
+from src.factories import GastoFactory
+from src.utils import today_epoch
 
 logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.INFO)
 
 TOKEN = Settings().token
 
-
 knownUsers = []  # todo: save these in a file,
 userStep = {}  # so they won't reset every time the bot restarts
+infoData = []
 
 commands = {  # command description used in the "help" command
     'start': 'Get used to the bot',
@@ -20,7 +23,10 @@ commands = {  # command description used in the "help" command
 }
 
 imageSelect = types.ReplyKeyboardMarkup(one_time_keyboard=True)  # create the image selection keyboard
-imageSelect.add('Mickey', 'Minnie')
+imageSelect.add('SUPERMERCADO')
+imageSelect.add('RESTAURANTE')
+imageSelect.add('BAR')
+imageSelect.add('OCIO')
 
 hideBoard = types.ReplyKeyboardRemove()  # if sent as reply_markup, will hide the keyboard
 
@@ -91,6 +97,7 @@ def command_long_text(m):
 # user can chose an image (multi-stage command example)
 @bot.message_handler(commands=['ig'])
 def command_image(m):
+    infoData.clear()
     cid = m.chat.id
     bot.send_message(cid, "Inserte gasto")  # show the keyboard
     userStep[cid] = 1  # set the user to the next step (expecting a reply in the listener now)
@@ -100,23 +107,31 @@ def command_image(m):
 @bot.message_handler(func=lambda message: get_user_step(message.chat.id) == 1)
 def msg_image_select(m):
     cid = m.chat.id
-    gasto = m.text
+    infoData.append(float(m.text))
     bot.send_message(cid, "Seleccione categoría", reply_markup=imageSelect)  # show the keyboard
     userStep[cid] = 2
+
 
 @bot.message_handler(func=lambda message: get_user_step(message.chat.id) == 2)
 def msg_image_select(m):
     cid = m.chat.id
-    gasto = m.text
+    infoData.append(m.text)
     bot.send_message(cid, "Escriba comentario")  # show the keyboard
     userStep[cid] = 3
+
 
 @bot.message_handler(func=lambda message: get_user_step(message.chat.id) == 3)
 def msg_image_select(m):
     cid = m.chat.id
-    comment = m.text
-    bot.send_message(cid, "Todo guardado")  # show the keyboard
-    
+    infoData.append(m.text)
+    Controller(GastoFactory()).insertar({
+        'precio': infoData[0],
+        'establecimiento': infoData[1],
+        'fecha': today_epoch(),
+        'comentario': infoData[2]
+    })
+    bot.send_message(cid, "✅ Todo guardado")  # show the keyboard
+
 
 # filter on a specific message
 @bot.message_handler(func=lambda message: message.text == "hi")
