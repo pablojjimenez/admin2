@@ -52,8 +52,9 @@ if __name__ == '__main__':
         2. ingresos.        (ii, li)
         3. clases.          (ic, lc)
         4. alumnos.         (ia, la)
-        5. informe.         (inf)
-        6. clases por mes.  (infc) 
+        5. histotial.       (ih, h) 
+        6. informe.         (inf)
+        7. clases por mes.  (infc) 
         {}
     '''.format(C.KMAG, C.RST)
     clean()
