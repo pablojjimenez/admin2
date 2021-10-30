@@ -85,7 +85,6 @@ class ClaseM(Model):
     def __init__(self, data: Dict = None):
         self.alumno = None
         self.tech = None
-        self.duracion = None
         self.precio = None
         self.fecha = None
         super().__init__(data)
@@ -98,8 +97,7 @@ class ClaseM(Model):
         return cls({
             'alumno': tuple[1],
             'tech': tuple[2],
-            'duracion': tuple[3],
-            'precio': tuple[4],
+            'precio': tuple[3],
             'fecha': translate_from_epoch(tuple[5]),
         })
 

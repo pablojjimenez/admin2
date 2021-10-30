@@ -6,7 +6,6 @@ CREATE TABLE "Ingresos" (
 	"precio"	REAL NOT NULL,
 	"concepto"	TEXT NOT NULL,
 	"fecha"	INTEGER NOT NULL,
-	"pagador"	TEXT NOT NULL,
 	PRIMARY KEY("id" AUTOINCREMENT)
 )'''
 
@@ -14,9 +13,8 @@ GASTOS_SH = '''
 CREATE TABLE "Gastos" (
 	"id"	INTEGER NOT NULL,
 	"precio"	REAL NOT NULL,
-	"establecimiento"	TEXT NOT NULL,
+	"concepto"	TEXT NOT NULL,
 	"fecha"	INTEGER NOT NULL,
-	"comentario"	TEXT,
 	PRIMARY KEY("id" AUTOINCREMENT)
 )
 '''
@@ -40,7 +38,6 @@ CREATE TABLE "Clases" (
 	"id"	INTEGER NOT NULL,
 	"alumno"	INTEGER,
 	"tech"	INTEGER,
-	"duracion"	INTEGER NOT NULL,
 	"precio"	REAL NOT NULL,
 	"fecha"	INTEGER NOT NULL,
 	PRIMARY KEY("id" AUTOINCREMENT),
