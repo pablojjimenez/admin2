@@ -8,7 +8,6 @@ class IngresoM(Model):
         self.precio = None
         self.concepto = None
         self.fecha = None
-        self.pagador = None
         super().__init__(data)
 
     def _fill(self, data: Dict):
@@ -16,11 +15,11 @@ class IngresoM(Model):
 
     @classmethod
     def from_tuple(cls, tuple: Tuple):
+        print('--->', tuple)
         return cls({
             'precio': tuple[1],
             'concepto': tuple[2],
             'fecha': translate_from_epoch(tuple[3]),
-            'pagador': tuple[4]
         })
 
     def __str__(self) -> str:
@@ -30,9 +29,8 @@ class IngresoM(Model):
 class GastoM(Model):
     def __init__(self, data: Dict = None):
         self.precio = None
-        self.establecimiento = None
         self.fecha = None
-        self.comentario = None
+        self.concepto = None
         super().__init__(data)
 
     def _fill(self, data: Dict):
@@ -40,11 +38,11 @@ class GastoM(Model):
 
     @classmethod
     def from_tuple(cls, tuple: Tuple):
+        print('--->', tuple)
         return cls({
             'precio': tuple[1],
-            'establecimiento': tuple[2],
             'fecha': translate_from_epoch(tuple[3]),
-            'comentario': tuple[4]
+            'concepto': tuple[2]
         })
 
     def __str__(self) -> str:
@@ -98,7 +96,7 @@ class ClaseM(Model):
             'alumno': tuple[1],
             'tech': tuple[2],
             'precio': tuple[3],
-            'fecha': translate_from_epoch(tuple[5]),
+            'fecha': translate_from_epoch(tuple[4]),
         })
 
     def __str__(self) -> str:

@@ -57,7 +57,7 @@ if __name__ == '__main__':
         7. clases por mes.  (infc) 
         {}
     '''.format(C.KMAG, C.RST)
-    clean()
+    # clean()
 
     if len(sys.argv) > 1:
         handler(sys.argv[1])

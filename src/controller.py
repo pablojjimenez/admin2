@@ -18,8 +18,9 @@ class Controller:
         print(C.KYEL)
         for d in self.model._dir():
             dat.setdefault(d, None)
-            dat[d] = input('%12s : ' % d.upper())
-            if not dat[d]:
+            if d != 'fecha':
+                dat[d] = input('%12s : ' % d.upper())
+            else:
                 dat[d] = today_epoch()
         print(C.RST)
         return dat
