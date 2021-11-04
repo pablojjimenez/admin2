@@ -15,7 +15,6 @@ class IngresoM(Model):
 
     @classmethod
     def from_tuple(cls, tuple: Tuple):
-        print('--->', tuple)
         return cls({
             'precio': tuple[1],
             'concepto': tuple[2],
@@ -38,7 +37,6 @@ class GastoM(Model):
 
     @classmethod
     def from_tuple(cls, tuple: Tuple):
-        print('--->', tuple)
         return cls({
             'precio': tuple[1],
             'fecha': translate_from_epoch(tuple[3]),
